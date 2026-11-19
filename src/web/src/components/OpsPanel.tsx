@@ -943,15 +943,15 @@ export function OpsPanel({
                           {st?.configured ? (
                             <span
                               className={
-                                "rounded px-1.5 py-0.5 text-[10.5px] font-medium " +
-                                (st.hasAuthHint ? "bg-deal-subtle text-deal" : "bg-code-subtle text-amber-800")
+                                "rounded px-1.5 py-0.5 text-[11px] font-medium " +
+                                (st.hasAuthHint ? "bg-deal-subtle text-deal" : "bg-code-subtle text-code")
                               }
                               title={`已保存字段：${st.keyNames.join(", ")}`}
                             >
                               已托管 {st.count} 项{st.hasAuthHint ? " · 含登录态" : " · 待核对"}
                             </span>
                           ) : (
-                            <span className="rounded bg-ink-100 px-1.5 py-0.5 text-[10.5px] text-ink-500">未配置</span>
+                            <span className="rounded bg-ink-100 px-1.5 py-0.5 text-[11px] text-ink-500">未配置</span>
                           )}
                         </div>
                         <div className="text-[11px] text-ink-400">
@@ -1183,7 +1183,7 @@ export function OpsPanel({
                             : s.last_status === "failed"
                               ? "bg-alert-subtle text-alert"
                               : s.last_status === "degraded"
-                                ? "bg-code-subtle text-amber-800"
+                                ? "bg-code-subtle text-code"
                                 : "bg-ink-100 text-ink-600")
                         }
                       >
@@ -1362,7 +1362,7 @@ export function OpsPanel({
                                 : s.last_status === "failed"
                                   ? "bg-alert-subtle text-alert"
                                   : s.last_status === "degraded"
-                                    ? "bg-code-subtle text-amber-800"
+                                    ? "bg-code-subtle text-code"
                                     : "bg-ink-100 text-ink-600")
                             }
                           >
@@ -1583,7 +1583,7 @@ export function OpsPanel({
             {retCounts && (
               <span className="text-[12px] text-ink-500">
                 在库 <span className="font-mono font-medium text-ink-800">{retCounts.total}</span> · 收藏{" "}
-                <span className="font-mono font-medium text-amber-700">{retCounts.starred}</span> · 已关闭{" "}
+                <span className="font-mono font-medium text-code">{retCounts.starred}</span> · 已关闭{" "}
                 <span className="font-mono font-medium">{retCounts.ignored}</span>
               </span>
             )}
@@ -1646,7 +1646,7 @@ export function OpsPanel({
                 type="button"
                 disabled={cleaning}
                 onClick={doCleanup}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-alert-border bg-alert-subtle px-3.5 py-1.5 text-[12.5px] font-medium text-alert hover:bg-red-100/80 disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-alert-border bg-alert-subtle px-3.5 py-1.5 text-[12.5px] font-medium text-alert hover:bg-alert-border/60 disabled:opacity-60"
               >
                 {cleaning ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />} 立即清理
               </button>

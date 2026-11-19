@@ -864,7 +864,7 @@ export function App() {
       {me.avatarUrl ? (
         <img src={me.avatarUrl} alt="" className="h-6 w-6 shrink-0 rounded-full border border-ink-200" />
       ) : (
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-100 text-[10px] font-semibold text-ink-600">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink-100 text-[11px] font-semibold text-ink-600">
           {(me.name ?? me.username).slice(0, 1).toUpperCase()}
         </span>
       )}
@@ -1093,7 +1093,7 @@ export function App() {
               <X size={12} />
             </button>
           ) : (
-            <kbd className="pointer-events-none absolute top-1/2 right-2 hidden -translate-y-1/2 rounded border border-ink-200 bg-canvas px-1.5 py-0.5 font-mono text-[10.5px] text-ink-400 lg:inline">
+            <kbd className="pointer-events-none absolute top-1/2 right-2 hidden -translate-y-1/2 rounded border border-ink-200 bg-canvas px-1.5 py-0.5 font-mono text-[11px] text-ink-400 lg:inline">
               /
             </kbd>
           )}
@@ -1295,7 +1295,7 @@ export function App() {
                   >
                     <SlidersHorizontal size={14} />
                     {activeFilterCount > 0 && (
-                      <span className="absolute -top-1 -right-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-accent px-0.5 font-mono text-[9px] leading-none text-white">
+                      <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-0.5 font-mono text-[11px] leading-none text-white">
                         {activeFilterCount}
                       </span>
                     )}
@@ -1326,7 +1326,7 @@ export function App() {
                       type="button"
                       onClick={() => setCategories([])}
                       className={
-                        "shrink-0 rounded-md px-2 py-0.5 text-[11.5px] font-medium transition-colors active:scale-[0.97] " +
+                        "shrink-0 rounded-md px-2 py-0.5 text-[11.5px] font-medium pressable " +
                         (categories.length === 0
                           ? "bg-brand-subtle font-semibold text-accent"
                           : "text-ink-500 hover:bg-ink-100 hover:text-ink-900")
@@ -1347,7 +1347,7 @@ export function App() {
                             )
                           }
                           className={
-                            "inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-[11.5px] transition-colors active:scale-[0.97] " +
+                            "inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-[11.5px] pressable " +
                             (active
                               ? "bg-ink-950 font-medium text-white"
                               : n > 0
@@ -1357,7 +1357,7 @@ export function App() {
                         >
                           <span>{categoryLabelForPreset(key, preset)}</span>
                           {n > 0 && (
-                            <span className={"font-mono text-[10.5px] tabular-nums " + (active ? "text-white/75" : "text-ink-400")}>
+                            <span className={"font-mono text-[11px] tabular-nums " + (active ? "text-white/75" : "text-ink-400")}>
                               {n}
                             </span>
                           )}
@@ -1446,7 +1446,7 @@ export function App() {
                                   }
                                 >
                                   <span className="truncate">{categoryLabelForPreset(key, preset)}</span>
-                                  <span className={"ml-1 font-mono text-[10.5px] " + (checked ? "text-white/70" : "text-ink-400")}>
+                                  <span className={"ml-1 font-mono text-[11px] " + (checked ? "text-white/70" : "text-ink-400")}>
                                     {n}
                                   </span>
                                 </button>
@@ -1574,7 +1574,7 @@ export function App() {
                     aria-pressed={unreadOnly}
                     onClick={() => setUnreadOnly((v) => !v)}
                     className={
-                      "h-7 rounded-md border px-2.5 text-[12px] font-medium transition-colors active:scale-[0.97] " +
+                      "h-7 rounded-md border px-2.5 text-[12px] font-medium pressable " +
                       (unreadOnly
                         ? "border-ink-950 bg-ink-950 text-white"
                         : "border-ink-200 bg-surface text-ink-600 hover:border-ink-300")
@@ -1590,7 +1590,7 @@ export function App() {
                     <button
                       type="button"
                       onClick={() => void markVisibleRead()}
-                      className="inline-flex h-7 items-center gap-1 rounded-md border border-ink-200 bg-surface px-2 text-[12px] font-medium text-ink-600 transition-colors hover:bg-ink-100 hover:text-ink-950 active:scale-[0.97]"
+                      className="inline-flex h-7 items-center gap-1 rounded-md border border-ink-200 bg-surface px-2 text-[12px] font-medium text-ink-600 pressable hover:bg-ink-100 hover:text-ink-950"
                       title="把当前列表里的未读条目一次性标为已读"
                     >
                       <CheckCheck size={12} /> 标已读
@@ -1753,8 +1753,8 @@ export function App() {
                 </div>
               )}
               {items.loading && !visible.length && <div role="status" aria-label="资源加载中" className="divide-y divide-ink-100">
-                {Array.from({ length: 5 }, (_, index) => <div key={index} className="flex items-center gap-4 px-6 py-5">
-                  <div className="h-4 w-9 rounded bg-ink-100" /><div className="flex-1 space-y-2"><div className="h-3 w-2/3 rounded bg-ink-100" /><div className="h-2.5 w-1/3 rounded bg-ink-100" /></div>
+                {Array.from({ length: 5 }, (_, index) => <div key={index} className="flex items-center gap-4 px-3.5 py-5 sm:px-6">
+                  <div className="skeleton-bar h-4 w-9 shrink-0 rounded bg-ink-100" /><div className="min-w-0 flex-1 space-y-2"><div className="skeleton-bar h-3 w-2/3 rounded bg-ink-100" /><div className="skeleton-bar h-2.5 w-1/3 rounded bg-ink-100" /></div><div className="skeleton-bar hidden h-3 w-14 shrink-0 rounded bg-ink-100 sm:block" />
                 </div>)}
               </div>}
 

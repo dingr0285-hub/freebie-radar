@@ -245,7 +245,7 @@ export function UserPushPanel({ boot }: { boot: Bootstrap }) {
         <section ref={credentialsRef} className="panel space-y-4 p-5">
           <div className="settings-section-title">
             <KeyRound size={14} className="text-accent" /> {viaWebhook ? "Webhook 凭据" : "Bot 凭据"}
-            <span className="ml-auto rounded-full bg-canvas-subtle px-2 py-0.5 text-[10.5px] font-medium text-ink-600">
+            <span className="ml-auto rounded-full bg-canvas-subtle px-2 py-0.5 text-[11px] font-medium text-ink-600">
               {cfg.settings.deliverVia === "webhook" ? "Webhook" : "Telegram"}
             </span>
           </div>

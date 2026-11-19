@@ -352,7 +352,7 @@ export function AiPanel({
                   <CircleCheck size={11} /> 运行中
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
+                <span className="inline-flex items-center gap-1 rounded-md bg-code-subtle px-1.5 py-0.5 text-[11px] font-medium text-code">
                   <AlertTriangle size={11} /> 未启用
                 </span>
               )}
@@ -435,17 +435,17 @@ export function AiPanel({
           <div
             className={
               "rounded-lg border p-3 text-[12.5px] " +
-              (test.ok ? "border-deal-border bg-deal-subtle" : "border-red-200 bg-red-50")
+              (test.ok ? "border-deal-border bg-deal-subtle" : "border-alert-border bg-alert-subtle")
             }
           >
             <div className="mb-2 flex items-center gap-2 font-medium">
-              {test.ok ? <CircleCheck size={13} className="text-deal" /> : <CircleX size={13} className="text-red-600" />}
+              {test.ok ? <CircleCheck size={13} className="text-deal" /> : <CircleX size={13} className="text-alert" />}
               {test.ok ? "连通正常" : "调用失败"} · {test.model} · {test.ms} ms
-              {test.error && <span className="font-normal text-red-700">{test.error}</span>}
+              {test.error && <span className="font-normal text-alert">{test.error}</span>}
             </div>
             {test.results.map((r) => (
               <div key={r.title} className="flex flex-wrap items-center gap-2 py-1 text-[12px]">
-                <span className={"shrink-0 " + (r.keep ? "text-deal" : "text-red-600")}>
+                <span className={"shrink-0 " + (r.keep ? "text-deal" : "text-alert")}>
                   {r.keep ? <Check size={12} /> : <CircleX size={12} />}
                 </span>
                 <span className="min-w-0 flex-1 truncate font-medium text-ink-800">{r.title}</span>
@@ -486,7 +486,7 @@ export function AiPanel({
             {backfill.reviewed === 0 && (backfill.skippedBlocked ?? 0) > 0 && !backfill.error ? (
               <span className="ml-1 text-ink-500">— 当前没有未被屏蔽的待审条目</span>
             ) : null}
-            {backfill.error && <span className="text-red-700"> · {backfill.error}</span>}
+            {backfill.error && <span className="text-alert"> · {backfill.error}</span>}
           </div>
         )}
       </div>
@@ -592,7 +592,7 @@ export function AiPanel({
                           </span>
                           <span className="min-w-0 flex-1 truncate font-medium text-ink-800">{ev.title}</span>
                           {typeof ev.quality === "number" && (
-                            <span className="shrink-0 rounded bg-brand-subtle px-1 py-0.5 font-mono text-[10.5px] text-accent">
+                            <span className="shrink-0 rounded bg-brand-subtle px-1 py-0.5 font-mono text-[11px] text-accent">
                               ★{ev.quality}
                             </span>
                           )}
@@ -617,7 +617,7 @@ export function AiPanel({
                   key={run.id}
                   className="flex flex-wrap items-center gap-2.5 rounded-lg border border-ink-200 bg-surface-hover px-3 py-2 text-[12px]"
                 >
-                  <span className={"shrink-0 rounded border px-1.5 py-0.5 text-[10.5px] font-medium " + meta.cls}>
+                  <span className={"shrink-0 rounded border px-1.5 py-0.5 text-[11px] font-medium " + meta.cls}>
                     {meta.label}
                   </span>
                   <span className="min-w-0 flex-1 truncate font-medium text-ink-800">

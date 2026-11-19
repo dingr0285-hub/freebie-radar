@@ -89,7 +89,7 @@ export function HotPanel({
                 type="button"
                 onClick={() => onScope(s.key)}
                 className={
-                  "rounded px-2.5 py-1 text-[11.5px] font-medium transition-colors active:scale-[0.98] " +
+                  "rounded px-2.5 py-1 text-[11.5px] font-medium pressable " +
                   (scope === s.key ? "bg-ink-950 text-white" : "text-ink-500 hover:text-ink-950")
                 }
               >
@@ -104,7 +104,7 @@ export function HotPanel({
                 type="button"
                 onClick={() => onHours(w.hours)}
                 className={
-                  "rounded px-2.5 py-1 text-[11.5px] font-medium transition-colors active:scale-[0.98] " +
+                  "rounded px-2.5 py-1 text-[11.5px] font-medium pressable " +
                   (hours === w.hours ? "bg-ink-950 text-white" : "text-ink-500 hover:text-ink-950")
                 }
               >
@@ -115,7 +115,7 @@ export function HotPanel({
           <button
             type="button"
             onClick={onReload}
-            className="inline-flex h-7 items-center gap-1 rounded-md border border-ink-200 px-2 text-[11.5px] font-medium text-ink-600 transition-colors hover:bg-ink-100 active:scale-[0.98]"
+            className="inline-flex h-7 items-center gap-1 rounded-md border border-ink-200 px-2 text-[11.5px] font-medium text-ink-600 pressable hover:bg-ink-100"
             title="重新统计"
           >
             <RefreshCw size={11} className={loading ? "animate-spin" : ""} />
@@ -177,7 +177,7 @@ export function HotPanel({
                       onClick={() => onSearchWord(w.w)}
                       title={`${w.w}：本窗口 ${w.n} 次，上一窗口 ${w.prev} 次（点击搜索）`}
                       className={
-                        "rounded px-1.5 py-0.5 transition-all duration-150 hover:-translate-y-0.5 active:scale-95 " +
+                        "rounded px-1.5 py-0.5 pressable hover:-translate-y-0.5 " +
                         (hovered === w.w
                           ? "bg-brand-subtle text-accent"
                           : hot
@@ -189,8 +189,8 @@ export function HotPanel({
                       style={{ fontSize: size + "px", fontWeight: size >= 22 ? 600 : 500 }}
                     >
                       {w.w}
-                      {hot && <span className="ml-0.5 text-[10px] font-semibold text-deal">↑</span>}
-                      <span className="ml-1 align-super font-mono text-[10px] font-normal text-ink-400">{w.n}</span>
+                      {hot && <span className="ml-0.5 text-[11px] font-semibold text-deal">↑</span>}
+                      <span className="ml-1 align-super font-mono text-[11px] font-normal text-ink-400">{w.n}</span>
                     </button>
                   );
                 })}
@@ -223,7 +223,7 @@ export function HotPanel({
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-ink-100">
                       <div
-                        className="h-full rounded-full bg-brand transition-all duration-500 ease-out group-hover:bg-accent"
+                        className="h-full rounded-full bg-brand transition-[width,background-color] duration-500 ease-out group-hover:bg-accent"
                         style={{ width: Math.round((c.n / catMax) * 100) + "%" }}
                       />
                     </div>
@@ -260,7 +260,7 @@ export function HotPanel({
                         {it.kind && it.kind !== "freebie" && <span>· {KIND_LABEL[it.kind] ?? it.kind}</span>}
                         {it.quality ? <span className="text-deal">· 质量 {it.quality}</span> : null}
                         {(it.dupCount ?? 1) > 1 ? (
-                          <span className="rounded bg-brand-subtle px-1 py-0.2 text-[10.5px] text-accent">
+                          <span className="rounded bg-brand-subtle px-1 py-0.2 text-[11px] text-accent">
                             {it.dupCount} 源同步
                           </span>
                         ) : null}
@@ -307,7 +307,7 @@ export function HotPanel({
                         {it.category && <span>· {categoryLabelForKind(it.category, it.kind)}</span>}
                         {it.quality ? <span className="text-accent">· 质量 {it.quality}</span> : null}
                         {(it.dupCount ?? 1) > 1 ? (
-                          <span className="rounded bg-brand-subtle px-1 py-0.2 text-[10.5px] text-accent">
+                          <span className="rounded bg-brand-subtle px-1 py-0.2 text-[11px] text-accent">
                             {it.dupCount} 篇同事件
                           </span>
                         ) : null}

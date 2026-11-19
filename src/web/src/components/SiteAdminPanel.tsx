@@ -565,7 +565,7 @@ export function SiteAdminPanel() {
               </div>
             ))}
             {job.log && (
-              <pre className="max-h-[160px] overflow-auto rounded border border-ink-200 bg-surface p-2 font-mono text-[10.5px] leading-relaxed whitespace-pre-wrap text-ink-600">
+              <pre className="max-h-[160px] overflow-auto rounded border border-ink-200 bg-surface p-2 font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-ink-600">
                 {job.log}
               </pre>
             )}

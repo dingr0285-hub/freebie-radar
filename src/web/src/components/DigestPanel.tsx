@@ -54,7 +54,7 @@ export function DigestPanel({
                   : "border-ink-200 bg-surface text-ink-700 hover:bg-ink-100")
               }
             >
-              {d.kind === "weekly" ? <span className="mr-1 text-[10.5px] opacity-80">周报</span> : null}
+              {d.kind === "weekly" ? <span className="mr-1 text-[11px] opacity-80">周报</span> : null}
               {d.date}
               {d.pushed_at ? <span className="ml-1.5 text-[11px] opacity-80">· 已推</span> : null}
             </button>

@@ -9,6 +9,7 @@
 
   --color-ink-950: #111318;
   --color-ink-900: #1b1e26;
+  --color-ink-800: #262a33;
   --color-ink-700: #374151;
   --color-ink-600: #4b5563;
   --color-ink-500: #525c6b;
@@ -33,6 +34,7 @@
   --color-code-border: #fde68a;
 
   --color-alert: #dc2626;
+  --color-alert-hover: #b91c1c;
   --color-alert-subtle: #fef2f2;
   --color-alert-border: #fecaca;
 
@@ -126,6 +128,7 @@
   border-bottom: 2px solid transparent;
   color: var(--color-ink-500);
   font-size: 13px;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 .channel-nav button:hover { color: var(--color-ink-950); background: var(--color-surface-hover); }
 .channel-nav button[aria-pressed="true"] {
@@ -320,6 +323,44 @@
   scrollbar-width: none;
 }
 
+/* Quiet press feedback: transform + colour only, never width/height.
+   One shared class so every button presses the same way and reduced-motion
+   can switch it off in one place. */
+.pressable {
+  transition:
+    transform 120ms ease-out,
+    translate 150ms ease-out,
+    scale 120ms ease-out,
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* Cover image zoom on card hover: transform only. */
+.cover-zoom {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .cover-zoom {
+  transform: scale(1.03);
+}
+
+/* Loading skeleton: opacity pulse only, no sliding gradients. */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.skeleton-bar {
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .drawer-enter,
   .backdrop-enter,
@@ -329,7 +370,22 @@
   .list-enter,
   .ai-enter,
   .ai-shimmer,
-  .ai-pulse-ring {
+  .ai-pulse-ring,
+  .skeleton-bar,
+  .animate-spin,
+  .animate-pulse {
     animation: none !important;
+  }
+  .pressable {
+    transition: none;
+  }
+  .pressable:active {
+    transform: none;
+  }
+  .cover-zoom {
+    transition: none;
+  }
+  .group:hover .cover-zoom {
+    transform: none;
   }
 }

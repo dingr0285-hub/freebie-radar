@@ -34,7 +34,7 @@ export function CodeChip({ code, onCopy }: { code: string; onCopy: (code: string
         "inline-flex max-w-[46vw] items-center gap-1 truncate rounded px-2 py-1 font-mono text-[11px] font-semibold transition-colors sm:max-w-none sm:py-0.5 " +
         (copied
           ? "bg-deal-subtle text-deal"
-          : "bg-code-subtle text-code hover:bg-amber-200/70")
+          : "bg-code-subtle text-code hover:bg-code-border/70")
       }
       title="点击复制兑换码"
     >
@@ -69,26 +69,26 @@ function PriceBadge({ item, inline = false }: { item: Item; inline?: boolean }) 
 
 const OBTAIN_STYLE: Record<string, string> = {
   conditional: "bg-code-subtle text-code",
-  lottery: "bg-purple-50 text-purple-700",
-  trial: "bg-sky-50 text-sky-700",
+  lottery: "bg-brand-subtle text-accent",
+  trial: "bg-deal-subtle text-deal",
   promo: "bg-ink-100 text-ink-600",
   paid: "bg-ink-100 text-ink-600",
 };
 
 const OBTAIN_TEXT: Record<string, string> = {
   conditional: "text-code",
-  lottery: "text-purple-700",
-  trial: "text-sky-700",
+  lottery: "text-accent",
+  trial: "text-deal",
   promo: "text-ink-500",
   paid: "text-ink-500",
 };
 
 /** 获取方式徽章：非 free 的一律标出来，避免抽奖/试用/推广混进「完全白嫖」。 */
 const KIND_STYLE: Record<string, string> = {
-  deal: "bg-amber-50 text-amber-700",
-  opensource: "bg-emerald-50 text-emerald-700",
-  news: "bg-rose-50 text-rose-700",
-  info: "bg-sky-50 text-sky-700",
+  deal: "bg-code-subtle text-code",
+  opensource: "bg-deal-subtle text-deal",
+  news: "bg-alert-subtle text-alert",
+  info: "bg-brand-subtle text-accent",
 };
 
 function KindBadge({ kind, category, inline = false }: { kind: string | null | undefined; category?: string | null; inline?: boolean }) {
@@ -100,7 +100,7 @@ function KindBadge({ kind, category, inline = false }: { kind: string | null | u
   if (!label) return null;
   if (inline) {
     return (
-      <span className={"shrink-0 rounded px-1.5 py-0.5 text-[10.5px] font-medium " + (KIND_STYLE[kind] ?? "bg-ink-100 text-ink-600")}>
+      <span className={"shrink-0 rounded px-1.5 py-0.5 text-[11px] font-medium " + (KIND_STYLE[kind] ?? "bg-ink-100 text-ink-600")}>
         {label}
       </span>
     );
@@ -345,7 +345,7 @@ function CoverImage({
         loading="lazy"
         referrerPolicy="no-referrer"
         onError={() => setBroken(true)}
-        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        className="h-full w-full object-cover cover-zoom"
       />
       {children}
     </div>
@@ -388,7 +388,7 @@ export function ItemCard({
     <article
       onClick={() => onOpen(item)}
       className={
-        "panel group flex h-full cursor-pointer flex-col overflow-hidden transition-all hover:border-ink-300 hover:shadow-sm " +
+        "panel group flex h-full cursor-pointer flex-col overflow-hidden transition-[border-color,box-shadow,opacity] duration-150 hover:border-ink-300 hover:shadow-sm " +
         (item.read ? "opacity-65 hover:opacity-100" : "")
       }
     >
@@ -400,7 +400,7 @@ export function ItemCard({
             loading="lazy"
             referrerPolicy="no-referrer"
             onError={() => setImgBroken(true)}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover cover-zoom"
           />
           <span
             className={
@@ -521,7 +521,7 @@ export function ItemCard({
               onClick={() => onPatch(item.id, { starred: !item.starred })}
               className={
                 "rounded-md p-1.5 hover:bg-ink-100 " +
-                (item.starred ? "text-amber-500" : "text-ink-400 hover:text-ink-800")
+                (item.starred ? "text-code" : "text-ink-400 hover:text-ink-800")
               }
               title={item.starred ? "取消收藏" : "收藏"}
             >
@@ -705,7 +705,7 @@ export function ItemDetailDrawer({
               评分 {Math.round(item.score)}
             </span>
             {exp && (
-              <span className={"inline-flex items-center gap-1 " + (exp.urgent ? "font-medium text-amber-700" : "text-ink-500")}>
+              <span className={"inline-flex items-center gap-1 " + (exp.urgent ? "font-medium text-code" : "text-ink-500")}>
                 <Clock3 size={11} /> {exp.text}
               </span>
             )}
@@ -720,7 +720,7 @@ export function ItemDetailDrawer({
                 "flex items-center gap-2 rounded-lg border px-3.5 py-2.5 text-[12.5px] " +
                 (item.ai.keep === false
                   ? "border-ink-200 bg-ink-100/70 text-ink-600"
-                  : "border-deal-border bg-deal-subtle/70 text-emerald-900")
+                  : "border-deal-border bg-deal-subtle/70 text-deal")
               }
             >
               <Sparkles size={14} className={item.ai.keep === false ? "text-ink-500" : "text-deal"} />
@@ -744,7 +744,7 @@ export function ItemDetailDrawer({
 
           {codes.length > 0 && (
             <div className="rounded-lg border border-code-border bg-code-subtle/70 p-3.5">
-              <div className="mb-2 text-[12px] font-medium text-amber-900">提取到的兑换码（点击复制）</div>
+              <div className="mb-2 text-[12px] font-medium text-code">提取到的兑换码（点击复制）</div>
               <div className="flex flex-wrap gap-2">
                 {codes.map((code) => (
                   <CodeChip key={code} code={code} onCopy={onCopyCode} />
@@ -822,7 +822,7 @@ export function ItemDetailDrawer({
             className={
               "inline-flex grow basis-[calc(50%-0.25rem)] items-center justify-center gap-1 rounded-lg border px-3 py-2.5 text-[13px] transition-colors sm:grow-0 sm:basis-auto sm:py-2 " +
               (item.starred
-                ? "border-amber-300 bg-code-subtle text-amber-800"
+                ? "border-code-border bg-code-subtle text-code"
                 : "border-ink-200 bg-surface text-ink-700 hover:bg-ink-100")
             }
           >
@@ -841,7 +841,7 @@ export function ItemDetailDrawer({
               onClose();
               onQuickBlock(item);
             }}
-            className="inline-flex grow basis-[calc(50%-0.25rem)] items-center justify-center gap-1 rounded-lg border border-alert-border bg-alert-subtle px-3 py-2.5 text-[13px] text-alert hover:bg-red-100/80 sm:grow-0 sm:basis-auto sm:py-2"
+            className="inline-flex grow basis-[calc(50%-0.25rem)] items-center justify-center gap-1 rounded-lg border border-alert-border bg-alert-subtle px-3 py-2.5 text-[13px] text-alert hover:bg-alert-border/60 sm:grow-0 sm:basis-auto sm:py-2"
           >
             <ShieldAlert size={14} /> 屏蔽
           </button>
@@ -981,7 +981,7 @@ export function QuickBlockModal({
                   setBusy(false);
                 }
               }}
-              className="rounded-lg bg-alert px-4 py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-red-700 disabled:opacity-40"
+              className="rounded-lg bg-alert px-4 py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-alert-hover disabled:opacity-40"
             >
               加入屏蔽规则
             </button>

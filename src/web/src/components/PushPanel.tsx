@@ -324,7 +324,7 @@ export function PushPanel({
             className={
               "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[13px] font-medium transition-colors " +
               (s.enabled
-                ? "border-deal-border bg-deal-subtle text-deal hover:bg-emerald-100"
+                ? "border-deal-border bg-deal-subtle text-deal hover:bg-deal-border/60"
                 : "border-ink-200 bg-ink-100 text-ink-600 hover:bg-ink-200")
             }
           >
@@ -334,7 +334,7 @@ export function PushPanel({
       </section>
 
       {!payload?.ready && (
-        <div className="rounded-lg border border-code-border bg-code-subtle p-3.5 text-[12.5px] text-amber-900">
+        <div className="rounded-lg border border-code-border bg-code-subtle p-3.5 text-[12.5px] text-code">
           当前渠道尚未就绪。个人用户请先在「我的」保存渠道凭据；自建站请检查服务端推送配置。规则可以先保存，但不会发送消息。
         </div>
       )}
@@ -954,10 +954,10 @@ export function PushPanel({
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-1.5 font-medium text-ink-900">
                               <span>{rt.name}</span>
-                              <span className="rounded bg-ink-100 px-1.5 py-0.5 text-[10.5px] text-ink-600">
+                              <span className="rounded bg-ink-100 px-1.5 py-0.5 text-[11px] text-ink-600">
                                 {rt.instant ? "可即时" : "仅攒批"}
                               </span>
-                              <span className="rounded bg-ink-100 px-1.5 py-0.5 font-mono text-[10.5px] text-ink-600">
+                              <span className="rounded bg-ink-100 px-1.5 py-0.5 font-mono text-[11px] text-ink-600">
                                 ≥{rt.minScore}分
                               </span>
                               {rt.kinds.length > 0 && (
@@ -1165,13 +1165,13 @@ export function PushPanel({
                               <div className="flex flex-wrap items-center justify-between gap-1">
                                 <span className="text-[11px] text-ink-500">允许分类（不选表示全部分类）</span>
                                 <div className="flex flex-wrap items-center gap-1">
-                                  <span className="text-[10.5px] text-ink-400">套用频道：</span>
+                                  <span className="text-[11px] text-ink-400">套用频道：</span>
                                   {CHANNELS.map((ch) => (
                                     <button
                                       key={ch.key}
                                       type="button"
                                       onClick={() => setRouteDraft({ ...routeDraft, categories: [...ch.categories] })}
-                                      className="rounded border border-ink-200 bg-surface px-1.5 py-0.5 text-[10.5px] text-ink-600 hover:border-brand-border hover:text-brand"
+                                      className="rounded border border-ink-200 bg-surface px-1.5 py-0.5 text-[11px] text-ink-600 hover:border-brand-border hover:text-brand"
                                     >
                                       {ch.label}
                                     </button>
@@ -1180,7 +1180,7 @@ export function PushPanel({
                                     <button
                                       type="button"
                                       onClick={() => setRouteDraft({ ...routeDraft, categories: [] })}
-                                      className="text-[10.5px] font-medium text-brand hover:underline"
+                                      className="text-[11px] font-medium text-brand hover:underline"
                                     >
                                       清空
                                     </button>
@@ -1190,7 +1190,7 @@ export function PushPanel({
                               <div className="mt-1 space-y-1">
                                 {CATEGORY_GROUPS.map((group) => (
                                   <div key={group.key} className="flex flex-wrap items-center gap-1">
-                                    <span className="w-[52px] shrink-0 text-[10.5px] text-ink-400">{group.label}</span>
+                                    <span className="w-[52px] shrink-0 text-[11px] text-ink-400">{group.label}</span>
                                     {group.categories.map((ck) => {
                                       const on = routeDraft.categories.includes(ck);
                                       return (
@@ -1470,7 +1470,7 @@ export function PushPanel({
                   <Moon size={13} className="text-ink-500" /> 夜间免打扰时段
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className={`text-[11.5px] font-medium ${payload?.quiet ? "text-amber-700" : "text-ink-500"}`}>
+                  <span className={`text-[11.5px] font-medium ${payload?.quiet ? "text-code" : "text-ink-500"}`}>
                     {!s.quietEnabled ? "未启用" : payload?.quiet ? "免打扰中" : "正常推送时段"}
                   </span>
                   <button
@@ -1678,7 +1678,7 @@ export function PushPanel({
                       className={
                         "rounded-md px-2 py-0.5 font-medium " +
                         (l.kind === "instant"
-                          ? "bg-code-subtle text-amber-800"
+                          ? "bg-code-subtle text-code"
                           : l.kind === "batch"
                             ? "bg-brand-subtle text-brand"
                             : "bg-ink-100 text-ink-700")
